@@ -12,13 +12,8 @@ server.on("connection", function(socket) {
                 console.log("Client data: %s", d);
                 d = d.toString('ascii');
 
-		if(d === "HELO text\n"){
-			socket.write(d+"IP:"+ server.address() +"Port:"+ PORT + "StudentID:"+ SID +"\n");
-		}
-
-
                 if(d === "KILL_SERVICE\n"){
-                        server.close();
+                        socket.destroy();
                 }
 	
 		else {
@@ -26,11 +21,11 @@ server.on("connection", function(socket) {
                         socket.write(d+"IP:"+ socket.address().address +"\nPort:"+ PORT + "\nStudentID:"+ SID +"\n")
 		}		
 
-
         });
 
         socket.on("close", function() {
                 console.log("Connection has been closed from %s", remoteAddress);
+                server.close();
         });
 
         socket.on("error", function(err){

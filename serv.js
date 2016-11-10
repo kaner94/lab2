@@ -29,7 +29,7 @@ server.on("connection", function(socket) {
         });
 
         socket.on("error", function(err){
-                console.log("Oopsie, we've got an ERROR: %s", err.message);
+                //console.log("Oopsie, we've got an ERROR: %s", err.message);
         });
 
 });

@@ -17,6 +17,9 @@ Make shells executable with:
 
 Run `sudo ./compile.sh` 
 This will install Node.JS and required NPM modules!
+You may be required to configure NPM to work with your proxy as follows:
+`npm config set proxy PROXY`
+`npm config set https-proxy PROXY`
 
 #### STEP 3
 

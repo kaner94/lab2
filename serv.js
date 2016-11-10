@@ -1,9 +1,17 @@
 var net = require("net");
 var ip = require("ip");
 var server = net.createServer();
-var PORT = process.argv[2];
+var PORT;
 var ADDRESS = ip.address();
 var SID = 13325208;
+
+if(process.argv[2]){
+        PORT = process.argv[2];
+}
+else {
+        console.log("No port specified, opening on default %s", PORT);
+        PORT = 9000;
+}
 
 server.on("connection", function(socket) {
         var remoteAddress = socket.remoteAddress + ":" + socket.remotePort;
@@ -17,10 +25,8 @@ server.on("connection", function(socket) {
                 }
 	
 		else {
-                        socket.write(d+"IP:"+ socket.address().address +"\nPort:"+ PORT + "\nStudentID:"+ SID +"\n", function(err){
-                                socket.end();
-                        });
-                        //socket.end();
+                        socket.write(d+"IP:"+ socket.address().address +"\nPort:"+ PORT + "\nStudentID:"+ SID +"\n");
+                        socket.end();
 		}		
 
         });
@@ -31,7 +37,7 @@ server.on("connection", function(socket) {
         });
 
         socket.on("error", function(err){
-                console.log("Error: %s", err.message);
+                
         });
 
 });

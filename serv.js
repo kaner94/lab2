@@ -32,7 +32,6 @@ server.on("connection", function(socket) {
                 console.log("Oopsie, we've got an ERROR: %s", err.message);
         });
 
-
 });
 
 server.on("error", function(err){

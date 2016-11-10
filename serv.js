@@ -17,6 +17,7 @@ server.on("connection", function(socket) {
 	
 		else {
                         socket.write(d+"IP:"+ socket.address().address +"\nPort:"+ PORT + "\nStudentID:"+ SID +"\n");
+                        socket.end();
 		}		
 
         });

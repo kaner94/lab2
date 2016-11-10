@@ -1,7 +1,8 @@
 var net = require("net");
+var ip = require("ip");
 var server = net.createServer();
 var PORT = process.argv[2];
-var ADDRESS = "10.62.0.121";
+var ADDRESS = ip.address();
 var SID = 13325208;
 
 server.on("connection", function(socket) {

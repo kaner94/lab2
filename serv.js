@@ -1,6 +1,6 @@
 var net = require("net");
 var server = net.createServer();
-var PORT = 9000;
+var PORT = process.argv[2];
 var ADDRESS = "10.62.0.121";
 var SID = 13325208;
 
@@ -10,15 +10,13 @@ server.on("connection", function(socket) {
 
         socket.on("data", function(d) {
                 console.log("Client data: %s", d);
-                d = d.toString('ascii');
 
                 if(d === "KILL_SERVICE\n"){
                         socket.destroy();
                 }
 	
 		else {
-			console.log("RECEIVED: %s", d);
-                        socket.write(d+"IP:"+ socket.address().address +"\nPort:"+ PORT + "\nStudentID:"+ SID +"\n")
+                        socket.write(d+"IP:"+ socket.address().address +"\nPort:"+ PORT + "\nStudentID:"+ SID +"\n");
 		}		
 
         });
@@ -29,12 +27,19 @@ server.on("connection", function(socket) {
         });
 
         socket.on("error", function(err){
-                console.log("Oopsie, we've got an error there bub, on %s. Shark in the water?: %s", remoteAddress, err.message);
+                console.log("Oopsie, we've got an ERROR: %s", err.message);
         });
 
 
 });
 
+server.on("error", function(err){
+        console.log("ERROR: %s", err.message);
+});
+
+server.on("close", function(){
+        console.log("Server now closed for business");
+});
 
 server.listen(PORT, ADDRESS, function() {
         console.log("Server listening to Port %s %j", PORT, server.address());

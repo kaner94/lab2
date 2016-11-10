@@ -51,6 +51,6 @@ server.on("close", function(){
 });
 
 server.listen(PORT, ADDRESS, function() {
-        console.log("Server listening to Port %s %s", PORT, server.address().address);
+        console.log("Server listening to Port %s. Server Addess: %s", PORT, server.address().address);
 });
 

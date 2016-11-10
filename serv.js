@@ -9,7 +9,7 @@ if(process.argv[2]){
         PORT = process.argv[2];
 }
 else {
-        console.log("No port specified, opening on default %s", PORT);
+        console.log("No port specified, opening on default 9000");
         PORT = 9000;
 }
 
